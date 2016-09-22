@@ -49,4 +49,10 @@ public class Acelerometro extends AppCompatActivity implements SensorEventListen
         super.onResume();
         sm.registerListener(this,sensor,SensorManager.SENSOR_DELAY_NORMAL);
     }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        sm.unregisterListener(this);
+    }
 }

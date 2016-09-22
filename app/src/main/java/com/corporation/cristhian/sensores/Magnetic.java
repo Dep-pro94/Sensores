@@ -43,4 +43,17 @@ public class Magnetic extends AppCompatActivity implements SensorEventListener {
 
     }
 
+    /*aqui detengo los valores del acelerometro para optimizar la app*/
+    @Override
+    protected void onResume() {
+        super.onResume();
+        sm.registerListener(this,sensor,SensorManager.SENSOR_DELAY_NORMAL);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        sm.unregisterListener(this);
+    }
+
 }
