@@ -30,11 +30,30 @@ public class Acelerometro extends AppCompatActivity implements SensorEventListen
 
     @Override
     public void onSensorChanged(SensorEvent event) {
-        
+        /*variables para mostrar los valores que me da el sensor*/
+        float x,y,z;
+        x=event.values[0];
+        y=event.values[1];
+        z=event.values[2];
+        /*muestro los valores*/
+        textView.append("\n"+"valor de x :"+x+"\n"+"valor de y :"+y+"\n"+"valor de z :"+z);
     }
 
     @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
 
+    }
+    /*aqui detengo los valores del acelerometro para optimizar la app*/
+    @Override
+    protected void onResume() {
+        super.onResume();
+        sm.registerListener(this,sensor,SensorManager.SENSOR_DELAY_NORMAL);
+
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        sm.unregisterListener(this);
     }
 }
