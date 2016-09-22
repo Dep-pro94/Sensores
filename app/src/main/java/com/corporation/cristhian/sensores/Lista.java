@@ -27,7 +27,7 @@ public class Lista extends AppCompatActivity {
         ArrayAdapter<String> adapter=new ArrayAdapter<String>(this,android.R.layout.simple_expandable_list_item_1,valores);
         listView.setAdapter(adapter);
 
-        /*evento para dar click en los paises*/
+        /*evento para dar click en los items de la lista*/
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -36,10 +36,18 @@ public class Lista extends AppCompatActivity {
                         Intent intent=new Intent(Lista.this,MainActivity.class);
                         startActivity(intent);
                     break;
-
                     case 1:
                         Intent intent1=new Intent(Lista.this,Acelerometro.class);
                         startActivity(intent1);
+                    break;
+                    case 2:
+                        Intent intent2=new Intent(Lista.this,Magnetic.class);
+                        startActivity(intent2);
+                     break;
+                    case 3:
+                    Intent intent3=new Intent(Lista.this,Giroscopio.class);
+                    startActivity(intent3);
+                    break;
                 }
 
                 //Toast.makeText(getApplicationContext(),"posicion"+position,Toast.LENGTH_SHORT).show();

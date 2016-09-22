@@ -8,22 +8,21 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
 
-public class Acelerometro extends AppCompatActivity implements SensorEventListener{
-
+public class Magnetic extends AppCompatActivity implements SensorEventListener {
     TextView textView;
-    SensorManager sm;
     Sensor sensor;
-
+    SensorManager sm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_acelerometro);
+        setContentView(R.layout.activity_magnetic);
 
-        textView=(TextView)findViewById(R.id.txtacelerometro);
+        textView=(TextView)findViewById(R.id.txtmagnetic);
+
         sm=(SensorManager)getSystemService(SENSOR_SERVICE);
-        sensor=sm.getDefaultSensor(sensor.TYPE_ACCELEROMETER);
-
+        sensor=sm.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD);
+        sm.registerListener(this, sensor, SensorManager.SENSOR_DELAY_NORMAL);
 
 
     }
@@ -36,17 +35,12 @@ public class Acelerometro extends AppCompatActivity implements SensorEventListen
         y=event.values[1];
         z=event.values[2];
         /*muestro los valores*/
-        textView.append("\n"+"valor de x :"+x+"\n"+"valor de y :"+y+"\n"+"valor de z :"+z);
+        textView.append("\n"+"valor de x : "+x+" μT"+"\n"+"valor de y : "+y+"μT"+"\n"+"valor de z : "+z+" μT");
     }
 
     @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
 
     }
-    /*aqui detengo los valores del acelerometro para optimizar la app*/
-    @Override
-    protected void onResume() {
-        super.onResume();
-        sm.registerListener(this,sensor,SensorManager.SENSOR_DELAY_NORMAL);
-    }
+
 }
